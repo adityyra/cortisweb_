@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notice - CORTIS Official</title>
+    <script>
+        if (window.location.protocol.startsWith('http')) {
+            window.location.replace('notice.php' + window.location.search);
+        }
+    </script>
+    <!-- Font Loader -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Oswald:wght@500;700&family=Syne:wght@700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="notice.css">
+</head>
+
+<body>
+
+    <div class="wireframe-container">
+
+        <!-- HEADER -->
+        <header>
+            <div class="logo-container">
+                <a href="index.html" class="profile-logo" style="text-decoration: none;">
+                    <img src="images/CORTISLOGO.png" alt="Cortis Logo">
+                </a>
+                <a href="index.html" class="logo-brand">CORTIS</a>
+            </div>
+
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html">HOME</a>
+                <a href="about.html">ABOUT</a>
+                <div class="dropdown">
+                    <a href="music.html">MUSIC</a>
+                    <div class="dropdown-content">
+                        <a href="videos.html">VIDEOS</a>
+                    </div>
+                </div>
+                <a href="jadwal_konser.html">TOUR</a>
+                <a href="galeri.html">GALLERY</a>
+                <a href="notice.html" class="active">NOTICE</a>
+            </nav>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </header>
+
+        <!-- SIDE INDICATOR -->
+        <div class="side-indicator">
+            <div class="side-number">07</div>
+            <div class="side-line"></div>
+            <div class="side-text">NOTICE</div>
+        </div>
+
+        <main>
+
+            <div class="notice-layout">
+
+                <!-- Kolom Kiri: Judul Halaman -->
+                <div class="notice-left">
+                    <h1 class="notice-main-title">NOTICE</h1>
+                </div>
+
+                <!-- Kolom Kanan: Search, Filter, List -->
+                <div class="notice-right">
+
+                    <div class="filter-bar">
+                        <div class="search-wrapper">
+                            <input type="text" class="search-input" id="searchInput"
+                                placeholder="Search info or birthdays..." onkeyup="filterNotices()">
+                        </div>
+                        <div class="category-buttons">
+                            <button class="cat-btn active" id="btn-all" onclick="filterCategory('all')">All</button>
+                            <button class="cat-btn" id="btn-birthday"
+                                onclick="filterCategory('birthday')">Birthday</button>
+                            <button class="cat-btn" id="btn-info" onclick="filterCategory('info')">Info</button>
+                        </div>
+                    </div>
+
+                    <!-- Notice List -->
+                    <div class="notice-list" id="noticeList">
+
+                        <!-- Notice 1 -->
+                        <div class="notice-item" data-category="birthday" onclick="toggleNotice(this)">
+                            <div class="notice-header">
+                                <div class="notice-number">109</div>
+                                <div class="notice-summary">
+                                    <h3 class="notice-title">Happy Birthday JAMES</h3>
+                                    <p class="notice-date">2026-06-15</p>
+                                </div>
+                                <div class="notice-badge">Birthday</div>
+                            </div>
+                            <div class="notice-body">
+                                <div class="notice-content-inner">
+                                    <p>Happy Birthday to <strong>JAMES</strong>, Leader and Main Vocalist of
+                                        CORTIS! Let's celebrate this special day together by sending our warmest
+                                        wishes and love.</p>
+                                    <p>May James always be healthy, happy, and continue to lead CORTIS with 
+                                        inspiration to a bigger world stage. Don't forget to share your
+                                        birthday wishes using the official hashtags:
+                                        <strong>#HappyJamesDay #CORTISLeader</strong>.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Notice 2 -->
+                        <div class="notice-item" data-category="info" onclick="toggleNotice(this)">
+                            <div class="notice-header">
+                                <div class="notice-number">108</div>
+                                <div class="notice-summary">
+                                    <h3 class="notice-title">CORTIS World Tour &lt;THE FIRST CHAPTER&gt; Ticket Open
+                                        Info</h3>
+                                    <p class="notice-date">2026-06-01</p>
+                                </div>
+                                <div class="notice-badge">Info</div>
+                            </div>
+                            <div class="notice-body">
+                                <div class="notice-content-inner">
+                                    <p>Announcement of concert ticket sales for <strong>CORTIS World Tour: "The First
+                                            Chapter"</strong> for Jakarta (ICE BSD), Bangkok (Impact Arena),
+                                        and Tokyo (Tokyo Dome).</p>
+                                    <p>Ticket sales will officially open on:</p>
+                                    <ul>
+                                        <li><strong>Official Fan Pre-sale:</strong> July 10, 2026 at 10:00 AM (WIB)</li>
+                                        <li><strong>General Sale:</strong> July 11, 2026 at 2:00 PM (WIB)</li>
+                                    </ul>
+                                    <p>Please make sure to purchase tickets only through official ticket partners listed in the
+                                        Tour menu of this website to avoid fraud. See you at the concert stage!</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Notice 3 -->
+                        <div class="notice-item" data-category="birthday" onclick="toggleNotice(this)">
+                            <div class="notice-header">
+                                <div class="notice-number">107</div>
+                                <div class="notice-summary">
+                                    <h3 class="notice-title">Happy Birthday JUHOON</h3>
+                                    <p class="notice-date">2026-05-28</p>
+                                </div>
+                                <div class="notice-badge">Birthday</div>
+                            </div>
+                            <div class="notice-body">
+                                <div class="notice-content-inner">
+                                    <p>Happy Birthday to <strong>JUHOON</strong>, Main Dancer and Lead Visual of
+                                        CORTIS!</p>
+                                    <p>Today is a special day for CORTIS's stage charmer. Thank you
+                                        for the hard work, sweet smiles, and amazing dances that always bring life to
+                                        the group's performances.</p>
+                                    <p>May this year bring a lot of happiness, health, and dreams coming
+                                        true for Juhoon. Use the hashtag <strong>#GoldenDancerJuhoon
+                                            #HappyJuhoonDay</strong> on your social media!</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Notice 4 -->
+                        <div class="notice-item" data-category="info" onclick="toggleNotice(this)">
+                            <div class="notice-header">
+                                <div class="notice-number">106</div>
+                                <div class="notice-summary">
+                                    <h3 class="notice-title">CORTIS 2nd Mini Album [BLUE SKY] Teaser Release Schedule
+                                    </h3>
+                                    <p class="notice-date">2026-05-15</p>
+                                </div>
+                                <div class="notice-badge">Info</div>
+                            </div>
+                            <div class="notice-body">
+                                <div class="notice-content-inner">
+                                    <p>Get ready to welcome the return of CORTIS! Our 2nd Mini Album titled
+                                        <strong>[BLUE SKY]</strong> akan segera dirilis. Berikut jadwal perilisan konten
+                                        teaser resmi:</p>
+                                    <ul>
+                                        <li><strong>20 Mei:</strong> Tracklist & Album Details</li>
+                                        <li><strong>22 Mei:</strong> Concept Photo #1 (Individual)</li>
+                                        <li><strong>24 Mei:</strong> Concept Photo #2 (Group)</li>
+                                        <li><strong>26 Mei:</strong> Highlight Medley</li>
+                                        <li><strong>28 Mei:</strong> MV Teaser #1</li>
+                                        <li><strong>29 Mei:</strong> Music Video Release & Album Drops!</li>
+                                    </ul>
+                                    <p>Let's give full support for CORTIS's latest masterpiece!</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Notice 5 -->
+                        <div class="notice-item" data-category="birthday" onclick="toggleNotice(this)">
+                            <div class="notice-header">
+                                <div class="notice-number">105</div>
+                                <div class="notice-summary">
+                                    <h3 class="notice-title">Happy Birthday KEONHO</h3>
+                                    <p class="notice-date">2026-04-23</p>
+                                </div>
+                                <div class="notice-badge">Birthday</div>
+                            </div>
+                            <div class="notice-body">
+                                <div class="notice-content-inner">
+                                    <p>Happy Birthday to <strong>KEONHO</strong>, Main Rapper CORTIS!</p>
+                                    <p>Mari kita rayakan hari kelahiran produser andalan dan suara rap berkarakter
+                                        CORTIS. Terima kasih telah memproduksi melodi-melodi indah yang menyatukan kita
+                                        semua.</p>
+                                    <p>Semoga Keonho terus berkarya dengan bebas dan selalu dilimpahi kebahagiaan.
+                                        Kirimkan cinta Anda lewat hashtag: <strong>#HappyKeonhoDay
+                                            #CortisRapper</strong>.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Notice 6 -->
+                        <div class="notice-item" data-category="birthday" onclick="toggleNotice(this)">
+                            <div class="notice-header">
+                                <div class="notice-number">104</div>
+                                <div class="notice-summary">
+                                    <h3 class="notice-title">Happy Birthday SEONGHYEON</h3>
+                                    <p class="notice-date">2026-03-24</p>
+                                </div>
+                                <div class="notice-badge">Birthday</div>
+                            </div>
+                            <div class="notice-body">
+                                <div class="notice-content-inner">
+                                    <p>Happy Birthday to <strong>SEONGHYEON</strong>, Maknae dan Lead Dancer
+                                        tercinta CORTIS!</p>
+                                    <p>Selamat hari lahir untuk si bungsu yang penuh dengan senyuman dan energi positif.
+                                        Keceriaan Seonghyeon selalu berhasil menyampaikan perasaan bahagia dari setiap
+                                        lagu CORTIS kepada para penggemar.</p>
+                                    <p>Semoga Seonghyeon selalu sehat, bahagia, dan selalu memancarkan keceriaan bagi
+                                        CORTIS dan fans. Rayakan dengan hashtag: <strong>#DanceMachineSeonghyeon
+                                            #HappySeonghyeonDay</strong>.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Notice 7 -->
+                        <div class="notice-item" data-category="info" onclick="toggleNotice(this)">
+                            <div class="notice-header">
+                                <div class="notice-number">103</div>
+                                <div class="notice-summary">
+                                    <h3 class="notice-title">CORTIS 2026 Season's Greetings [BLACK & WHITE] Pre-Order
+                                        Info</h3>
+                                    <p class="notice-date">2025-10-15</p>
+                                </div>
+                                <div class="notice-badge">Info</div>
+                            </div>
+                            <div class="notice-body">
+                                <div class="notice-content-inner">
+                                    <p>The official teaser for <strong>CORTIS 2026 Season's Greetings [BLACK &
+                                            WHITE]</strong> has been released!</p>
+                                    <p>Mulai hari ini, Anda dapat melakukan pemesanan pre-order paket eksklusif akhir
+                                        tahun yang berisi: Kalender Meja, Planner Harian, Buku Foto Eksklusif (100
+                                        Halaman), Paket Kartu Foto Anggota, Poster Mini, dan DVD Di Balik Layar
+                                        Pembuatan.</p>
+                                    <p><strong>Periode Pre-Order:</strong> 15 Oktober 2025 - 5 November 2025<br>Jangan
+                                        sampai melewatkan koleksi terbatas ini!</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Notice 8 -->
+                        <div class="notice-item" data-category="info" onclick="toggleNotice(this)">
+                            <div class="notice-header">
+                                <div class="notice-number">102</div>
+                                <div class="notice-summary">
+                                    <h3 class="notice-title">CORTIS Official Lightstick Ver. 2 Pre-Order</h3>
+                                    <p class="notice-date">2025-09-10</p>
+                                </div>
+                                <div class="notice-badge">Info</div>
+                            </div>
+                            <div class="notice-body">
+                                <div class="notice-content-inner">
+                                    <p>Kami sangat gembira mengumumkan perilisan <strong>CORTIS Official Lightstick Versi 2!</strong></p>
+                                    <p>Dengan desain yang diperbarui dan fitur sinkronisasi Bluetooth yang lebih canggih, lightstick baru ini akan membuat pengalaman konser Anda semakin tak terlupakan.</p>
+                                    <p>Pre-order akan dimulai pada tanggal 15 September 2025 melalui CORTIS Weverse Shop. Pastikan untuk mendapatkan milik Anda!</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Notice 9 -->
+                        <div class="notice-item" data-category="info" onclick="toggleNotice(this)">
+                            <div class="notice-header">
+                                <div class="notice-number">101</div>
+                                <div class="notice-summary">
+                                    <h3 class="notice-title">CORTIS 2nd Anniversary Fanmeeting "OUR TIME"</h3>
+                                    <p class="notice-date">2025-08-01</p>
+                                </div>
+                                <div class="notice-badge">Info</div>
+                            </div>
+                            <div class="notice-body">
+                                <div class="notice-content-inner">
+                                    <p>Merayakan ulang tahun debut yang kedua, CORTIS akan mengadakan fanmeeting spesial bertajuk <strong>"OUR TIME"</strong>.</p>
+                                    <p>Acara ini akan diselenggarakan secara offline dan online agar seluruh penggemar global dapat berpartisipasi merayakan perjalanan luar biasa kita bersama.</p>
+                                    <ul>
+                                        <li><strong>Tanggal:</strong> 25 Agustus 2025</li>
+                                        <li><strong>Lokasi:</strong> Olympic Hall, Seoul</li>
+                                        <li><strong>Online Streaming:</strong> Weverse Concerts</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Notice 10 -->
+                        <div class="notice-item" data-category="info" onclick="toggleNotice(this)">
+                            <div class="notice-header">
+                                <div class="notice-number">100</div>
+                                <div class="notice-summary">
+                                    <h3 class="notice-title">CORTIS Official Fanclub 'CORONET' 2nd Generation Recruitment</h3>
+                                    <p class="notice-date">2025-06-20</p>
+                                </div>
+                                <div class="notice-badge">Info</div>
+                            </div>
+                            <div class="notice-body">
+                                <div class="notice-content-inner">
+                                    <p>Hello, this is CORTIS Official.</p>
+                                    <p>Registration for CORTIS's official fanclub, <strong>'CORONET' Generasi ke-2</strong>, will open soon!</p>
+                                    <p>2nd generation members will get various exclusive benefits including a physical membership card, a special welcome kit, and priority access for concert ticket purchases. Registration can be done via Weverse Shop.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="no-result" id="noResult">
+                        No notices match your search.
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination" id="noticePagination" style="display: none;">
+                        <a href="#noticeList" class="page-arrow" id="prevNoticePage">&#10094;</a>
+                        <span class="page-numbers" id="noticePageIndicator"><strong>1</strong> / 2</span>
+                        <a href="#noticeList" class="page-arrow" id="nextNoticePage">&#10095;</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-social">
+            <a href="https://www.instagram.com/cortis/" target="_blank"
+                style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; transition: opacity 0.2s;"><img src="images/instagram.png" alt="Instagram"
+                    class="footer-icon" style="filter: none;"> INSTAGRAM</a>
+            <a href="https://www.tiktok.com/@cortis_bighit" target="_blank"
+                style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; transition: opacity 0.2s;"><img src="images/tiktok.png" alt="TikTok"
+                    class="footer-icon" style="filter: none;"> TIKTOK</a>
+            <a href="https://x.com/cortis_bighit" target="_blank"
+                style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; transition: opacity 0.2s;"><img src="images/x.png" alt="X"
+                    class="footer-icon" style="filter: none;" > X</a>
+            <a href="https://youtube.com/@cortis_bighit?si=zvE_dOeq7-w3zoBZ" target="_blank"
+                style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; transition: opacity 0.2s;"
+                onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+                <img src="images/Youtube.png" alt="Youtube" class="footer-icon" style="filter: none;"> YOUTUBE
+            </a>
+        </div>
+            <div class="footer-bottom">
+                &copy; 2024 CORTIS OFFICIAL. PRIVACY | CONTACT
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let currentCategory = 'all';
+        let currentPage = 1;
+        const itemsPerPage = 7;
+        let filteredItems = [];
+
+        function toggleNotice(element) {
+            // Check if already expanded
+            const isExpanded = element.classList.contains('expanded');
+
+            // Collapse all notices first
+            const items = document.querySelectorAll('.notice-item');
+            items.forEach(item => item.classList.remove('expanded'));
+
+            // If it wasn't expanded, expand it now
+            if (!isExpanded) {
+                element.classList.add('expanded');
+            }
+        }
+
+        function filterCategory(category) {
+            currentCategory = category;
+
+            // Update active button style
+            const buttons = document.querySelectorAll('.cat-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + category).classList.add('active');
+
+            // Reset page on filter change
+            currentPage = 1;
+            applyFilter();
+        }
+
+        function filterNotices() {
+            currentPage = 1; // Reset to page 1 when typing search
+            applyFilter();
+        }
+
+        function applyFilter() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const items = document.querySelectorAll('.notice-item');
+            
+            // Collect all matching items
+            filteredItems = Array.from(items).filter(item => {
+                const category = item.getAttribute('data-category');
+                const title = item.querySelector('.notice-title').textContent.toLowerCase();
+                const content = item.querySelector('.notice-body').textContent.toLowerCase();
+                const num = item.querySelector('.notice-number').textContent.toLowerCase();
+
+                const matchesCategory = (currentCategory === 'all' || category === currentCategory);
+                const matchesQuery = (title.includes(query) || content.includes(query) || num.includes(query));
+
+                return matchesCategory && matchesQuery;
+            });
+
+            // Determine total pages
+            const totalPages = Math.max(1, Math.ceil(filteredItems.length / itemsPerPage));
+            if (currentPage > totalPages) {
+                currentPage = 1;
+            }
+
+            // Hide all first
+            items.forEach(item => {
+                item.style.display = 'none';
+                item.classList.remove('expanded');
+            });
+
+            // Show items for current page
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            
+            for (let i = startIndex; i < endIndex && i < filteredItems.length; i++) {
+                filteredItems[i].style.display = 'block';
+            }
+
+            // UI Updates
+            const noResult = document.getElementById('noResult');
+            const paginationEl = document.getElementById('noticePagination');
+            const pageIndicator = document.getElementById('noticePageIndicator');
+
+            if (filteredItems.length === 0) {
+                noResult.style.display = 'block';
+                paginationEl.style.display = 'none';
+            } else {
+                noResult.style.display = 'none';
+                
+                // Show pagination if more than 1 page
+                if (totalPages > 1) {
+                    paginationEl.style.display = 'flex';
+                    pageIndicator.innerHTML = `<strong>${currentPage}</strong> / ${totalPages}`;
+                } else {
+                    paginationEl.style.display = 'none';
+                }
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                applyFilter();
+            }
+        }
+        
+        function nextPage() {
+            const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                applyFilter();
+            }
+        }
+
+        // Event listeners for pagination
+        document.getElementById('prevNoticePage').addEventListener('click', (e) => {
+            e.preventDefault();
+            prevPage();
+        });
+        
+        document.getElementById('nextNoticePage').addEventListener('click', (e) => {
+            e.preventDefault();
+            nextPage();
+        });
+
+        // Hamburger Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            document.body.classList.toggle('no-scroll');
+        });
+        
+        // Initial setup
+        window.addEventListener('DOMContentLoaded', () => {
+            applyFilter();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concert Tour - CORTIS Official</title>
+    <script>
+        if (window.location.protocol.startsWith('http')) {
+            window.location.replace('jadwal_konser.php' + window.location.search);
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Syne:wght@700;800&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="jadwal_konser.css">
+</head>
+
+<body>
+
+    <div class="wireframe-container">
+
+        <!-- HEADER -->
+        <header>
+            <div class="logo-container">
+                <a href="index.html" class="profile-logo" style="text-decoration: none;">
+                    <img src="images/CORTISLOGO.png" alt="Cortis Logo">
+                </a>
+                <a href="index.html" class="logo-brand">CORTIS</a>
+            </div>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html">HOME</a>
+                <a href="about.html">ABOUT</a>
+                <div class="dropdown">
+                    <a href="music.html">MUSIC</a>
+                    <div class="dropdown-content">
+                        <a href="videos.html">VIDEOS</a>
+                    </div>
+                </div>
+                <a href="jadwal_konser.html" class="active">TOUR</a>
+                <a href="galeri.html">GALLERY</a>
+                <a href="notice.html">NOTICE</a>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </header>
+
+        <!-- SIDE INDICATOR -->
+        <div class="side-indicator">
+            <div class="side-number">05</div>
+            <div class="side-line"></div>
+            <div class="side-text">CONCERT</div>
+        </div>
+
+        <main>
+
+            <!-- CONCERT SCHEDULE SECTION -->
+            <section class="concert-section">
+                <h2 class="section-title">World Tour: "The First Chapter"</h2>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>DATE</th>
+                                <th>LOCATION</th>
+                                <th>VENUE</th>
+                                <th>STATUS</th>
+                                <th>COUNTDOWN CLOCK</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>JUL 10</td>
+                                <td>SEOUL, KOREA</td>
+                                <td>OLYMPIC HALL</td>
+                                <td class="status-soldout">SOLD OUT</td>
+                                <td>-</td>
+                                <td><button disabled>BUY TICKET</button></td>
+                            </tr>
+                            <tr>
+                                <td>JUL 11</td>
+                                <td>SEOUL, KOREA</td>
+                                <td>OLYMPIC HALL</td>
+                                <td class="status-soldout">SOLD OUT</td>
+                                <td>-</td>
+                                <td><button disabled>BUY TICKET</button></td>
+                            </tr>
+                            <tr>
+                                <td>AUG 21</td>
+                                <td>TOKYO, JAPAN</td>
+                                <td>TOKYO DOME</td>
+                                <td class="status-available">AVAILABLE</td>
+                                <td>[ 30 More Days ]</td>
+                                <td><button type="button" onclick="openTicketModal(3, 'TOKYO, JAPAN', 'TOKYO DOME', '2026-08-21')">BUY TICKET</button></td>
+                            </tr>
+                            <tr>
+                                <td>AUG 31</td>
+                                <td>JAKARTA, INDONESIA</td>
+                                <td>ICE BSD CITY</td>
+                                <td class="status-available">AVAILABLE</td>
+                                <td>[ 40 More Days ]</td>
+                                <td><button type="button" onclick="openTicketModal(4, 'JAKARTA, INDONESIA', 'ICE BSD CITY', '2026-08-31')">BUY TICKET</button></td>
+                            </tr>
+                            <tr>
+                                <td>SEP 15</td>
+                                <td>BANGKOK, THAILAND</td>
+                                <td>IMPACT ARENA</td>
+                                <td class="status-available">AVAILABLE</td>
+                                <td>[ 55 More Days ]</td>
+                                <td><button type="button" onclick="openTicketModal(5, 'BANGKOK, THAILAND', 'IMPACT ARENA', '2026-09-15')">BUY TICKET</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ======================================================= -->
+            <!-- TICKET PURCHASE MODAL (Tabel: ticket_orders)            -->
+            <!-- ======================================================= -->
+            <div id="ticketModal" class="modal-overlay" style="display: none;">
+                <div class="modal-box">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <div>
+                            <span class="modal-badge">OFFICIAL TICKETING</span>
+                            <h2 class="modal-title">BUY CONCERT TICKET</h2>
+                            <p class="modal-subtitle">World Tour: "The First Chapter"</p>
+                        </div>
+                        <button type="button" class="modal-close" onclick="closeTicketModal()" aria-label="Close modal">&times;</button>
+                    </div>
+
+                    <!-- 1. Ticket Order Form (English) -->
+                    <form id="ticketOrderForm" onsubmit="handleTicketOrder(event)">
+                        <!-- Selected Concert Information Banner -->
+                        <div class="concert-selected-card">
+                            <div class="concert-info-item">
+                                <span class="label">LOCATION</span>
+                                <strong id="displayConcertLocation">JAKARTA, INDONESIA</strong>
+                            </div>
+                            <div class="concert-info-item">
+                                <span class="label">VENUE</span>
+                                <strong id="displayConcertVenue">ICE BSD CITY</strong>
+                            </div>
+                            <div class="concert-info-item">
+                                <span class="label">DATE</span>
+                                <strong id="displayConcertDate">2026-08-31</strong>
+                            </div>
+                        </div>
+
+                        <!-- Form Fields Grid (Matching ticket_orders Table Specification) -->
+                        <div class="form-grid">
+                            <!-- concert_id: Foreign Key referencing concert_schedules.id -->
+                            <div class="form-group full-width">
+                                <label for="concert_id">SELECT CONCERT SCHEDULE <span class="req">*</span></label>
+                                <select id="concert_id" name="concert_id" required onchange="onConcertChange(this.value)">
+                                    <option value="3" data-location="TOKYO, JAPAN" data-venue="TOKYO DOME" data-date="2026-08-21">TOKYO, JAPAN — TOKYO DOME (AUG 21, 2026)</option>
+                                    <option value="4" data-location="JAKARTA, INDONESIA" data-venue="ICE BSD CITY" data-date="2026-08-31" selected>JAKARTA, INDONESIA — ICE BSD CITY (AUG 31, 2026)</option>
+                                    <option value="5" data-location="BANGKOK, THAILAND" data-venue="IMPACT ARENA" data-date="2026-09-15">BANGKOK, THAILAND — IMPACT ARENA (SEP 15, 2026)</option>
+                                </select>
+                            </div>
+
+                            <!-- fullname: VARCHAR(100) NOT NULL -->
+                            <div class="form-group">
+                                <label for="fullname">FULL NAME (AS ON ID / PASSPORT) <span class="req">*</span></label>
+                                <input type="text" id="fullname" name="fullname" placeholder="e.g. John Doe" required maxlength="100">
+                                <small>Must match your government-issued ID card</small>
+                            </div>
+
+                            <!-- identity_no: VARCHAR(16) NOT NULL -->
+                            <div class="form-group">
+                                <label for="identity_no">IDENTITY NUMBER (16-DIGIT NIK / PASSPORT) <span class="req">*</span></label>
+                                <input type="text" id="identity_no" name="identity_no" placeholder="e.g. 6171012304000001" required maxlength="16" pattern="[0-9]{16}" title="Must be 16-digit ID / Passport number">
+                                <small>16-digit NIK or passport number for verification</small>
+                            </div>
+
+                            <!-- email: VARCHAR(100) NOT NULL -->
+                            <div class="form-group">
+                                <label for="email">EMAIL ADDRESS <span class="req">*</span></label>
+                                <input type="email" id="email" name="email" placeholder="e.g. johndoe@example.com" required maxlength="100">
+                                <small>Official invoice & E-Ticket PDF will be sent here</small>
+                            </div>
+
+                            <!-- phone: VARCHAR(20) NOT NULL -->
+                            <div class="form-group">
+                                <label for="phone">WHATSAPP / PHONE NUMBER <span class="req">*</span></label>
+                                <input type="tel" id="phone" name="phone" placeholder="e.g. 081234567890" required maxlength="20">
+                                <small>Active contact number for ticket entry gates</small>
+                            </div>
+
+                            <!-- ticket_category: VARCHAR(50) NOT NULL -->
+                            <div class="form-group">
+                                <label for="ticket_category">TICKET CATEGORY <span class="req">*</span></label>
+                                <select id="ticket_category" name="ticket_category" required onchange="calculateOrderTotal()">
+                                    <option value="VIP" data-price="2750000">VIP (Soundcheck + Laminate) — Rp 2,750,000</option>
+                                    <option value="Festival" data-price="1850000" selected>Festival (Standing Area) — Rp 1,850,000</option>
+                                    <option value="Tribune" data-price="1250000">Tribune (Numbered Seating) — Rp 1,250,000</option>
+                                </select>
+                            </div>
+
+                            <!-- quantity: INT NOT NULL, DEFAULT 1 (Max 4) -->
+                            <div class="form-group">
+                                <label for="quantity">TICKET QUANTITY (MAX 4) <span class="req">*</span></label>
+                                <div class="qty-wrapper">
+                                    <button type="button" class="btn-qty" onclick="changeQty(-1)">-</button>
+                                    <input type="number" id="quantity" name="quantity" min="1" max="4" value="1" readonly required>
+                                    <button type="button" class="btn-qty" onclick="changeQty(1)">+</button>
+                                </div>
+                                <small>Maximum 4 tickets allowed per transaction</small>
+                            </div>
+
+                            <!-- payment_method: VARCHAR(50) NOT NULL -->
+                            <div class="form-group full-width">
+                                <label for="payment_method">PAYMENT METHOD <span class="req">*</span></label>
+                                <select id="payment_method" name="payment_method" required>
+                                    <option value="Bank Transfer - BCA">Bank Transfer - BCA Virtual Account</option>
+                                    <option value="Bank Transfer - Mandiri">Bank Transfer - Mandiri Virtual Account</option>
+                                    <option value="Bank Transfer - BNI">Bank Transfer - BNI Virtual Account</option>
+                                    <option value="GoPay / QRIS">E-Wallet (GoPay / QRIS Instant)</option>
+                                    <option value="Credit Card / Debit">Credit Card / Debit (Visa / Mastercard)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Order Summary Calculation -->
+                        <div class="order-summary-box">
+                            <div class="summary-row">
+                                <span>Unit Ticket Price:</span>
+                                <span id="summaryUnitPrice">Rp 1,850,000</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Quantity:</span>
+                                <span id="summaryQty">1 Ticket</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Taxes & Service Fee (5%):</span>
+                                <span id="summaryTax">Rp 92,500</span>
+                            </div>
+                            <div class="summary-divider"></div>
+                            <div class="summary-row total">
+                                <span>TOTAL PAYMENT:</span>
+                                <span id="summaryTotalPrice">Rp 1,942,500</span>
+                            </div>
+                        </div>
+
+                        <!-- Terms & Conditions Agreement Checkbox -->
+                        <div class="form-check">
+                            <input type="checkbox" id="termsCheck" required>
+                            <label for="termsCheck">
+                                I confirm that all personal details entered above strictly match my valid government ID / Passport, and I accept the official terms of the CORTIS Concert World Tour ticketing policy.
+                            </label>
+                        </div>
+
+                        <!-- Modal Actions -->
+                        <div class="modal-actions">
+                            <button type="button" class="btn-cancel" onclick="closeTicketModal()">CANCEL</button>
+                            <button type="submit" class="btn-confirm" id="btnSubmitOrder">CONFIRM & ORDER TICKET</button>
+                        </div>
+                    </form>
+
+                    <!-- 2. Transaction Receipt View (Status: PENDING) -->
+                    <div id="orderSuccessView" style="display: none;">
+                        <div class="success-header">
+                            <div class="success-icon">&#10004;</div>
+                            <h3>TICKET ORDER CREATED SUCCESSFULLY!</h3>
+                            <p>Transaction Status: <span class="badge-pending">PENDING</span> (Awaiting Payment)</p>
+                        </div>
+
+                        <div class="receipt-card">
+                            <div class="receipt-row">
+                                <span>Order Reference ID:</span>
+                                <strong id="receiptOrderId">#ORD-1001</strong>
+                            </div>
+                            <div class="receipt-row">
+                                <span>Full Name:</span>
+                                <strong id="receiptFullname">-</strong>
+                            </div>
+                            <div class="receipt-row">
+                                <span>Identity No (NIK):</span>
+                                <span id="receiptIdentity">-</span>
+                            </div>
+                            <div class="receipt-row">
+                                <span>Email / WhatsApp:</span>
+                                <span id="receiptContact">-</span>
+                            </div>
+                            <div class="receipt-row">
+                                <span>Concert & Venue:</span>
+                                <strong id="receiptConcert">-</strong>
+                            </div>
+                            <div class="receipt-row">
+                                <span>Category & Qty:</span>
+                                <span id="receiptCategory">-</span>
+                            </div>
+                            <div class="receipt-row">
+                                <span>Payment Method:</span>
+                                <span id="receiptPayment">-</span>
+                            </div>
+                            <div class="receipt-row total">
+                                <span>Total Amount:</span>
+                                <strong id="receiptTotal">-</strong>
+                            </div>
+
+                            <div class="va-box">
+                                <span class="va-label">Virtual Account / Transfer Account Number:</span>
+                                <div class="va-number" id="receiptVaNumber">80777081234567890</div>
+                                <small>Please complete the transfer within 24 hours. Your official E-Ticket PDF will be sent to your email automatically upon payment confirmation.</small>
+                            </div>
+                        </div>
+
+                        <div class="modal-actions">
+                            <button type="button" class="btn-confirm" onclick="finishOrder()">DONE & RETURN TO TOUR SCHEDULE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-social">
+                <span style="display: flex; align-items: center; gap: 8px;"><img src="images/instagram.png"
+                        alt="Instagram" class="footer-icon" style="filter: none;"> INSTAGRAM</span>
+                <span style="display: flex; align-items: center; gap: 8px;"><img src="images/tiktok.png" alt="TikTok"
+                        class="footer-icon" style="filter: none;"> TIKTOK</span>
+                <span style="display: flex; align-items: center; gap: 8px;"><img src="images/x.png" alt="X"
+                        class="footer-icon" style="filter: none;"> X</span>
+                <a href="https://www.youtube.com/@HYBELABELS" target="_blank" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+                    <img src="images/Youtube.png" alt="Youtube" class="footer-icon" style="filter: none;"> YOUTUBE
+                </a>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 CORTIS OFFICIAL. PRIVACY | CONTACT | <a href="admin/index.php" style="color: inherit; text-decoration: none; opacity: 0.7;" title="Open AdminLTE Dashboard"><i class="fas fa-lock" style="font-size: 0.8em;"></i> ADMIN</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // --- Responsive Hamburger Menu ---
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            document.body.classList.toggle('no-scroll');
+        });
+
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+            });
+        });
+
+        // --- TICKET ORDER SYSTEM (ticket_orders) ---
+        let currentOrderCounter = 1001;
+
+        // Concert schedule mapping
+        const concertMap = {
+            '3': { location: 'TOKYO, JAPAN', venue: 'TOKYO DOME', date: '2026-08-21' },
+            '4': { location: 'JAKARTA, INDONESIA', venue: 'ICE BSD CITY', date: '2026-08-31' },
+            '5': { location: 'BANGKOK, THAILAND', venue: 'IMPACT ARENA', date: '2026-09-15' }
+        };
+
+        // Open modal & set selected concert
+        function openTicketModal(concertId, location, venue, date) {
+            const modal = document.getElementById('ticketModal');
+            const selectConcert = document.getElementById('concert_id');
+            const form = document.getElementById('ticketOrderForm');
+            const successView = document.getElementById('orderSuccessView');
+
+            // Reset view
+            form.style.display = 'block';
+            successView.style.display = 'none';
+
+            if (concertId && concertMap[concertId]) {
+                selectConcert.value = concertId;
+                updateConcertDisplay(concertMap[concertId].location, concertMap[concertId].venue, concertMap[concertId].date);
+            } else if (location && venue && date) {
+                updateConcertDisplay(location, venue, date);
+            } else {
+                onConcertChange(selectConcert.value);
+            }
+
+            calculateOrderTotal();
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal
+        function closeTicketModal() {
+            const modal = document.getElementById('ticketModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        // Dropdown selection change event
+        function onConcertChange(concertId) {
+            const info = concertMap[concertId];
+            if (info) {
+                updateConcertDisplay(info.location, info.venue, info.date);
+            }
+        }
+
+        function updateConcertDisplay(location, venue, date) {
+            document.getElementById('displayConcertLocation').textContent = location;
+            document.getElementById('displayConcertVenue').textContent = venue;
+            document.getElementById('displayConcertDate').textContent = date;
+        }
+
+        // Quantity counter (- and + buttons between 1 and 4)
+        function changeQty(delta) {
+            const qtyInput = document.getElementById('quantity');
+            let current = parseInt(qtyInput.value) || 1;
+            current += delta;
+            if (current < 1) current = 1;
+            if (current > 4) current = 4;
+            qtyInput.value = current;
+            calculateOrderTotal();
+        }
+
+        // Dynamic price calculation
+        function calculateOrderTotal() {
+            const catSelect = document.getElementById('ticket_category');
+            const selectedOpt = catSelect.options[catSelect.selectedIndex];
+            const unitPrice = parseInt(selectedOpt.getAttribute('data-price')) || 1850000;
+            const qty = parseInt(document.getElementById('quantity').value) || 1;
+
+            const subtotal = unitPrice * qty;
+            const tax = Math.round(subtotal * 0.05); // 5% Service fee & tax
+            const grandTotal = subtotal + tax;
+
+            document.getElementById('summaryUnitPrice').textContent = 'Rp ' + unitPrice.toLocaleString('id-ID');
+            document.getElementById('summaryQty').textContent = qty + (qty > 1 ? ' Tickets' : ' Ticket');
+            document.getElementById('summaryTax').textContent = 'Rp ' + tax.toLocaleString('id-ID');
+            document.getElementById('summaryTotalPrice').textContent = 'Rp ' + grandTotal.toLocaleString('id-ID');
+        }
+
+        // Handle Form Submission: Sends data via POST to process_order.php (MySQL Database)
+        async function handleTicketOrder(event) {
+            event.preventDefault();
+
+            const form = document.getElementById('ticketOrderForm');
+            const submitBtn = document.getElementById('btnSubmitOrder');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'SAVING TO DATABASE...';
+
+            const concertId = document.getElementById('concert_id').value;
+            const concertInfo = concertMap[concertId] || { location: 'JAKARTA', venue: 'ICE BSD', date: '2026-08-31' };
+            const fullname = document.getElementById('fullname').value.trim();
+            const identityNo = document.getElementById('identity_no').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const catSelect = document.getElementById('ticket_category');
+            const category = catSelect.value;
+            const qty = document.getElementById('quantity').value;
+            const payment = document.getElementById('payment_method').value;
+            const totalText = document.getElementById('summaryTotalPrice').textContent;
+
+            const vaNum = '8077' + phone.replace(/[^0-9]/g, '').slice(-10);
+
+            // Prepare form data for backend PHP
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch('process_order.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Successfully inserted into MySQL ticket_orders table
+                    document.getElementById('receiptOrderId').textContent = '#ORD-' + result.order_id;
+                } else {
+                    console.warn('Backend note:', result.message);
+                    document.getElementById('receiptOrderId').textContent = '#ORD-' + currentOrderCounter++;
+                }
+            } catch (err) {
+                // Fallback if accessed via file:// without Apache web server
+                console.info('Running in static mode (no PHP server detected):', err);
+                document.getElementById('receiptOrderId').textContent = '#ORD-' + currentOrderCounter++;
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'CONFIRM & ORDER TICKET';
+            }
+
+            // Populate receipt view
+            document.getElementById('receiptFullname').textContent = fullname;
+            document.getElementById('receiptIdentity').textContent = identityNo;
+            document.getElementById('receiptContact').textContent = email + ' / ' + phone;
+            document.getElementById('receiptConcert').textContent = concertInfo.location + ' (' + concertInfo.venue + ') — ' + concertInfo.date;
+            document.getElementById('receiptCategory').textContent = category + ' (' + qty + (qty > 1 ? ' Tickets' : ' Ticket') + ')';
+            document.getElementById('receiptPayment').textContent = payment;
+            document.getElementById('receiptTotal').textContent = totalText;
+            document.getElementById('receiptVaNumber').textContent = vaNum;
+
+            // Transition from form to receipt view
+            form.style.display = 'none';
+            document.getElementById('orderSuccessView').style.display = 'block';
+        }
+
+        // Finish order and reset
+        function finishOrder() {
+            document.getElementById('ticketOrderForm').reset();
+            document.getElementById('quantity').value = 1;
+            closeTicketModal();
+        }
+
+        // Close modal when clicking outside box
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('ticketModal');
+            if (e.target === modal) {
+                closeTicketModal();
+            }
+        });
+
+        // Close modal on Escape key
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeTicketModal();
+            }
+        });
+    </script>
+</body>
+
+</html>

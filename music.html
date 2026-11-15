@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Discography - Home</title>
+    <script>
+        if (window.location.protocol.startsWith('http')) {
+            window.location.replace('music.php' + window.location.search);
+        }
+    </script>
+    <!-- Add Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400&family=Syne:wght@800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="music.css">
+</head>
+
+<body>
+
+    <!-- Header / Navigation Bar -->
+    <header>
+        <div class="logo-container">
+            <a href="index.html" class="profile-logo" style="text-decoration: none;">
+                <img src="images/CORTISLOGO.png" alt="Cortis Logo">
+            </a>
+            <a href="index.html" class="logo-brand">CORTIS</a>
+        </div>
+
+        <nav class="nav-menu" id="navMenu">
+            <a href="index.html">HOME</a>
+            <a href="about.html">ABOUT</a>
+            <div class="dropdown">
+                <a href="music.html" class="active">MUSIC</a>
+                <div class="dropdown-content">
+                    <a href="videos.html">VIDEOS</a>
+                </div>
+            </div>
+            <a href="jadwal_konser.html">TOUR</a>
+            <a href="galeri.html">GALLERY</a>
+            <a href="notice.html">NOTICE</a>
+        </nav>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </header>
+
+    <!-- SIDE INDICATOR -->
+    <div class="side-indicator">
+        <div class="side-number">03</div>
+        <div class="side-line"></div>
+        <div class="side-text">MUSIC</div>
+    </div>
+
+    <div class="music-layout"
+        style="display: flex; gap: 80px; max-width: 1200px; margin: 40px auto; padding: 0 20px; align-items: flex-start;">
+        <!-- Kiri: Daftar Album -->
+        <div class="album-sidebar" style="display: flex; flex-direction: column; gap: 40px; flex: 0 0 400px;">
+            <!-- Cover Album 1 (Atas) -->
+            <div class="album-item" onclick="showTracklist('album1')" style="cursor: pointer;">
+                <div class="cover-wrapper">
+                    <img src="images/greengreenalbum.jpg" alt="Cover GREENGREEN" class="main-cover">
+                    <div class="hover-overlay">
+                        <span class="cross-icon"></span>
+                    </div>
+                </div>
+                <div class="album-meta">
+                    <span class="album-title">GREENGREEN</span>
+                    <span class="album-date">2023-11-20</span>
+                </div>
+            </div>
+
+            <!-- Cover Album 2 (Bawah) -->
+            <div class="album-item" onclick="showTracklist('album2')" style="cursor: pointer;">
+                <div class="cover-wrapper">
+                    <img src="images/whatyouwantalbum.jpg" alt="Cover Color Outside The Lines" class="main-cover">
+                    <div class="hover-overlay">
+                        <span class="cross-icon"></span>
+                    </div>
+                </div>
+                <div class="album-meta">
+                    <span class="album-title">COLOR OUTSIDE THE LINES</span>
+                    <span class="album-date">2024-05-15</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kanan: Playlist & Audio Player -->
+        <div class="playlist-pane" id="playlist-pane"
+            style="flex: 1; background: #111; padding: 40px; border-radius: 12px;">
+            <div id="default-msg"
+                style="text-align: center; color: #888; font-weight: 300; letter-spacing: 2px; padding: 100px 0;">
+                SELECT AN ALBUM TO PLAY
+            </div>
+
+            <!-- CUSTOM PLAYER (Global for the right pane) -->
+            <div id="custom-player" style="display: none; flex-direction: column; width: 100%; margin-bottom: 30px;">
+                <div class="media-card"
+                    style="padding: 25px 20px; border-radius: 8px; background: #111; border: 1px solid #333; height: auto; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px;">
+                    <div class="vinyl-record" id="musicVinyl" style="margin-bottom: 5px; width: 150px; height: 150px;">
+                        <img src="images/greengreenalbum.jpg" alt="Album Art" id="playerCover">
+                        <div class="vinyl-hole"></div>
+                    </div>
+
+                    <h3 id="playerTitle"
+                        style="margin: 0; font-size: 1.1rem; font-weight: 500; letter-spacing: 0.5px; color: #fff; text-align: center;">
+                        CORTIS - Song</h3>
+
+                    <!-- Progress Bar -->
+                    <input type="range" id="progressBar" value="0" min="0" max="100"
+                        style="width: 100%; cursor: pointer; accent-color: #e60000; height: 4px; margin-bottom: 5px; background: #333; outline: none; border-radius: 2px;">
+
+                    <!-- Controls Row -->
+                    <div
+                        style="width: 100%; display: flex; justify-content: center; align-items: center; margin-top: 5px;">
+                        <span id="timeDisplay"
+                            style="color: #ccc; font-size: 0.95rem; font-family: monospace; letter-spacing: 1px; font-weight: bold;">0:00
+                            / 0:00</span>
+                    </div>
+                    <audio id="globalAudioPlayer" style="display: none;"></audio>
+                </div>
+            </div>
+
+            <!-- SPOTIFY PLAYER -->
+            <div id="spotify-player" style="display: none; width: 100%; margin-bottom: 30px;">
+                <iframe id="spotifyIframe" src="" width="100%" height="152" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+            </div>
+
+            <!-- Playlist Album 1 -->
+            <div class="tracklist-container" id="tracklist-album1" style="display: none;">
+                <h3 style="margin-top: 0; color: #fff; font-family: 'Syne', sans-serif; letter-spacing: 1px;">GREENGREEN
+                    - TRACKS</h3>
+                <div class="track-list-header">
+                    <div class="col-num">#</div>
+                    <div class="col-title">Title</div>
+                    <div class="col-dur">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                            <path
+                                d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z" />
+                        </svg>
+                    </div>
+                </div>
+                <ol class="track-list-new">
+                    <li data-num="1"
+                        onclick="playSpotifySong('https://open.spotify.com/embed/track/7diH1qnFziArYzynk3vkr6?utm_source=generator&si=3747db085eae4ab3', 'TNT', this)">
+                        <div class="col-num"><span class="track-num">1</span></div>
+                        <div class="col-title">TNT <span
+                                style="font-size: 0.7em; padding: 2px 5px; border-radius: 4px; background: #1DB954; color: white; margin-left: 8px;">Preview</span><br><span
+                                style="font-size: 0.85em; color: #888;">CORTIS</span></div>
+                        <div class="col-dur">2:02</div>
+                    </li>
+                    <li data-num="2" onclick="playCustomSong(`musics/CORTIS (코르티스) 'REDRED'.mp3`, 'REDRED', this)">
+                        <div class="col-num"><span class="track-num">2</span></div>
+                        <div class="col-title">REDRED <span
+                                style="font-size: 0.7em; padding: 2px 5px; border-radius: 4px; background: #e60000; color: white; margin-left: 8px;">Full</span><br><span
+                                style="font-size: 0.85em; color: #888;">CORTIS</span></div>
+                        <div class="col-dur">2:43</div>
+                    </li>
+                    <li data-num="3" onclick="playCustomSong('musics/acai.mp3', 'ACAI', this)">
+                        <div class="col-num"><span class="track-num">3</span></div>
+                        <div class="col-title">ACAI <span
+                                style="font-size: 0.7em; padding: 2px 5px; border-radius: 4px; background: #e60000; color: white; margin-left: 8px;">Full</span><br><span
+                                style="font-size: 0.85em; color: #888;">CORTIS</span></div>
+                        <div class="col-dur">2:53</div>
+                    </li>
+                    <li data-num="4"
+                        onclick="playSpotifySong('https://open.spotify.com/embed/track/2vKNzC9T3kdU2JECcvob3V?utm_source=generator&si=8c17dd8494444c5d', 'YOUNGCREATORCREW', this)">
+                        <div class="col-num"><span class="track-num">4</span></div>
+                        <div class="col-title">YOUNGCREATORCREW <span
+                                style="font-size: 0.7em; padding: 2px 5px; border-radius: 4px; background: #1DB954; color: white; margin-left: 8px;">Preview</span><br><span
+                                style="font-size: 0.85em; color: #888;">CORTIS</span></div>
+                        <div class="col-dur">2:56</div>
+                    </li>
+                    <li data-num="5"
+                        onclick="playSpotifySong('https://open.spotify.com/embed/track/3dCdcURa0Kk5UWXRY00HQy?utm_source=generator&si=2d27e866c9de46da', 'Wassup', this)">
+                        <div class="col-num"><span class="track-num">5</span></div>
+                        <div class="col-title">Wassup <span
+                                style="font-size: 0.7em; padding: 2px 5px; border-radius: 4px; background: #1DB954; color: white; margin-left: 8px;">Preview</span><br><span
+                                style="font-size: 0.85em; color: #888;">CORTIS</span></div>
+                        <div class="col-dur">3:04</div>
+                    </li>
+                    <li data-num="6" onclick="playCustomSong('musics/blue_lips.mp3', 'Blue Lips', this)">
+                        <div class="col-num"><span class="track-num">6</span></div>
+                        <div class="col-title">Blue Lips <span
+                                style="font-size: 0.7em; padding: 2px 5px; border-radius: 4px; background: #e60000; color: white; margin-left: 8px;">Full</span><br><span
+                                style="font-size: 0.85em; color: #888;">CORTIS</span></div>
+                        <div class="col-dur">2:21</div>
+                    </li>
+                </ol>
+            </div>
+
+            <!-- Playlist Album 2 -->
+            <div class="tracklist-container" id="tracklist-album2" style="display: none;">
+                <h3 style="margin-top: 0; color: #fff; font-family: 'Syne', sans-serif; letter-spacing: 1px;">COLOR
+                    OUTSIDE THE LINES - TRACKS</h3>
+                <div class="track-list-header">
+                    <div class="col-num">#</div>
+                    <div class="col-title">Title</div>
+                    <div class="col-dur">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                            <path
+                                d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z" />
+                        </svg>
+                    </div>
+                </div>
+                <ol class="track-list-new">
+                    <li class="active-track" data-num="1"
+                        onclick="playCustomSong(`musics/CORTIS (코르티스) 'GO!'.mp3`, 'GO!', this)">
+                        <div class="col-num"><span class="play-icon">▶</span></div>
+                        <div class="col-title">GO! <span
+                                style="font-size: 0.7em; padding: 2px 5px; border-radius: 4px; background: #e60000; color: white; margin-left: 8px;">Full</span><br><span
+                                style="font-size: 0.85em; color: #888;">CORTIS</span></div>
+                        <div class="col-dur">2:50</div>
+                    </li>
+                    <li data-num="2"
+                        onclick="playCustomSong(`musics/CORTIS (코르티스) 'What You Want'.mp3`, 'What You Want', this)">
+                        <div class="col-num"><span class="track-num">2</span></div>
+                        <div class="col-title">What You Want <span
+                                style="font-size: 0.7em; padding: 2px 5px; border-radius: 4px; background: #e60000; color: white; margin-left: 8px;">Full</span><br><span
+                                style="font-size: 0.85em; color: #888;">CORTIS</span></div>
+                        <div class="col-dur">3:14</div>
+                    </li>
+                    <li data-num="3" onclick="playCustomSong('musics/FaSHioN.mp3', 'FaSHioN', this)">
+                        <div class="col-num"><span class="track-num">3</span></div>
+                        <div class="col-title">FaSHioN <span
+                                style="font-size: 0.7em; padding: 2px 5px; border-radius: 4px; background: #e60000; color: white; margin-left: 8px;">Full</span><br><span
+                                style="font-size: 0.85em; color: #888;">CORTIS</span></div>
+                        <div class="col-dur">2:54</div>
+                    </li>
+                    <li data-num="4"
+                        onclick="playSpotifySong('https://open.spotify.com/embed/track/6T17ZI0glfM2IGLdUwtnLK?utm_source=generator&si=dddc291385974113', 'JoyRide', this)">
+                        <div class="col-num"><span class="track-num">4</span></div>
+                        <div class="col-title">JoyRide <span
+                                style="font-size: 0.7em; padding: 2px 5px; border-radius: 4px; background: #1DB954; color: white; margin-left: 8px;">Preview</span><br><span
+                                style="font-size: 0.85em; color: #888;">CORTIS</span></div>
+                        <div class="col-dur">2:37</div>
+                    </li>
+                    <li data-num="5"
+                        onclick="playSpotifySong('https://open.spotify.com/embed/track/0nyhsAcyDj533QrXa4hUug?utm_source=generator&si=75b3ae64906042d2', 'Lullaby', this)">
+                        <div class="col-num"><span class="track-num">5</span></div>
+                        <div class="col-title">Lullaby <span
+                                style="font-size: 0.7em; padding: 2px 5px; border-radius: 4px; background: #1DB954; color: white; margin-left: 8px;">Preview</span><br><span
+                                style="font-size: 0.85em; color: #888;">CORTIS</span></div>
+                        <div class="col-dur">2:44</div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-social">
+            <span style="display: flex; align-items: center; gap: 8px;"><img src="images/instagram.png" alt="Instagram"
+                    class="footer-icon" style="filter: none;"> INSTAGRAM</span>
+            <span style="display: flex; align-items: center; gap: 8px;"><img src="images/tiktok.png" alt="TikTok"
+                    class="footer-icon" style="filter: none;"> TIKTOK</span>
+            <span style="display: flex; align-items: center; gap: 8px;"><img src="images/x.png" alt="X"
+                    class="footer-icon" style="filter: none;"> X</span>
+            <a href="https://www.youtube.com/@HYBELABELS" target="_blank"
+                style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; transition: opacity 0.2s;"
+                onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+                <img src="images/Youtube.png" alt="Youtube" class="footer-icon" style="filter: none;"> YOUTUBE
+            </a>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2024 CORTIS OFFICIAL. PRIVACY | CONTACT | <a href="https://www.flaticon.com/free-icons/instagram"
+                title="instagram icons"></a>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            document.body.classList.toggle('no-scroll');
+        });
+
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+            });
+        });
+
+        // --- CUSTOM AUDIO PLAYER JS ---
+        const formatTime = (time) => {
+            if (isNaN(time)) return "0:00";
+            const minutes = Math.floor(time / 60);
+            const seconds = Math.floor(time % 60).toString().padStart(2, '0');
+            return `${minutes}:${seconds}`;
+        };
+
+        const gAudio = document.getElementById('globalAudioPlayer');
+        const vinyl = document.getElementById('musicVinyl');
+        const timeTxt = document.getElementById('timeDisplay');
+        const prog = document.getElementById('progressBar');
+
+        if (gAudio) {
+            gAudio.addEventListener('loadedmetadata', () => {
+                timeTxt.textContent = `0:00 / ${formatTime(gAudio.duration)}`;
+                prog.max = gAudio.duration;
+            });
+            gAudio.addEventListener('timeupdate', () => {
+                timeTxt.textContent = `${formatTime(gAudio.currentTime)} / ${formatTime(gAudio.duration)}`;
+                prog.value = gAudio.currentTime;
+            });
+            prog.addEventListener('input', () => {
+                gAudio.currentTime = prog.value;
+            });
+            gAudio.addEventListener('ended', () => {
+                vinyl.style.animationPlayState = 'paused';
+                const activeIcon = document.querySelector('.active-track .play-icon');
+                if (activeIcon) {
+                    activeIcon.innerText = '▶';
+                }
+            });
+        }
+
+        function showTracklist(albumId) {
+            document.getElementById('default-msg').style.display = 'none';
+            document.getElementById('custom-player').style.display = 'flex';
+            if (document.getElementById('spotify-player')) document.getElementById('spotify-player').style.display = 'none';
+            document.getElementById('tracklist-album1').style.display = 'none';
+            document.getElementById('tracklist-album2').style.display = 'none';
+
+            document.getElementById('tracklist-' + albumId).style.display = 'block';
+
+            // Vinyl image will update when a song is played, not when browsing.
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        let currentPlayingSrc = "";
+
+        function playSpotifySong(urlOrId, title, element) {
+            const e = window.event;
+            const clickedPlayBtn = e && e.target.closest('.col-num');
+            const isActive = element.classList.contains('active-track');
+
+            // Remove any existing accordion rows
+            document.querySelectorAll('.spotify-accordion-row').forEach(el => el.remove());
+
+            currentPlayingSrc = urlOrId;
+            gAudio.pause();
+            vinyl.style.animationPlayState = 'paused';
+
+            // Reset list styles
+            document.querySelectorAll('.track-list-new li:not(.spotify-accordion-row)').forEach(item => {
+                item.classList.remove('active-track');
+                item.style.borderRadius = '4px';
+                const colNum = item.querySelector('.col-num');
+                if (colNum) {
+                    const firstChild = colNum.firstElementChild;
+                    if (firstChild && firstChild.classList.contains('play-icon')) {
+                        const num = item.getAttribute('data-num') || '*';
+                        firstChild.outerHTML = `<span class="track-num">${num}</span>`;
+                    }
+                }
+            });
+
+            if (isActive) {
+                // Toggle off if clicking the currently open preview track
+                if (document.getElementById('spotify-player')) {
+                    document.getElementById('spotify-player').style.display = 'none';
+                }
+                currentPlayingSrc = "";
+                return;
+            }
+
+            let spotifyUrl = urlOrId;
+            if (!spotifyUrl.startsWith('http')) {
+                spotifyUrl = `https://open.spotify.com/embed/track/${urlOrId}?utm_source=generator`;
+            }
+
+            // Attempt to autoplay ONLY if the play button was clicked
+            if (clickedPlayBtn && !spotifyUrl.includes('autoplay=1')) {
+                spotifyUrl += (spotifyUrl.includes('?') ? '&' : '?') + 'autoplay=1';
+            }
+
+            if (document.getElementById('spotify-player')) {
+                document.getElementById('spotify-player').style.display = 'block';
+                document.getElementById('spotifyIframe').src = spotifyUrl;
+            }
+            document.getElementById('custom-player').style.display = 'none';
+
+            element.classList.add('active-track');
+            element.style.borderBottomLeftRadius = '0';
+            element.style.borderBottomRightRadius = '0';
+
+            const colNum = element.querySelector('.col-num');
+            if (colNum) {
+                // If it's autoplaying, show pause/play icon, but typically Spotify iframe takes over.
+                // Let's just show ▶ since the Spotify iframe has its own play control inside.
+                colNum.innerHTML = `<span class="play-icon">▶</span>`;
+            }
+
+            // Create neat accordion row that doesn't disrupt layout
+            const accordionRow = document.createElement('li');
+            accordionRow.className = 'spotify-accordion-row';
+            accordionRow.style.display = 'block';
+            accordionRow.style.padding = '10px 16px 16px 16px';
+            accordionRow.style.background = 'rgba(255, 255, 255, 0.05)';
+            accordionRow.style.borderBottomLeftRadius = '6px';
+            accordionRow.style.borderBottomRightRadius = '6px';
+            accordionRow.style.marginTop = '0px';
+            accordionRow.innerHTML = `<iframe data-testid="embed-iframe" style="border-radius:12px" src="${spotifyUrl}" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`;
+
+            element.insertAdjacentElement('afterend', accordionRow);
+        }
+
+        function playCustomSong(src, title, element) {
+            const e = window.event;
+            const clickedPlayBtn = e && e.target.closest('.col-num');
+
+            document.getElementById('spotify-player').style.display = 'none';
+            document.getElementById('custom-player').style.display = 'flex';
+
+            // Perbarui gambar Vinyl sesuai album track yang diputar
+            const tracklist = element.closest('.tracklist-container');
+            if (tracklist) {
+                if (tracklist.id === 'tracklist-album1') {
+                    document.getElementById('playerCover').src = 'images/greengreenalbum.jpg';
+                } else if (tracklist.id === 'tracklist-album2') {
+                    document.getElementById('playerCover').src = 'images/whatyouwantalbum.jpg';
+                }
+            }
+
+            // Check if we clicked the currently playing song
+            if (currentPlayingSrc === src) {
+                if (clickedPlayBtn) {
+                    if (gAudio.paused) {
+                        gAudio.play();
+                        vinyl.style.animationPlayState = 'running';
+                        const icon = element.querySelector('.play-icon');
+                        if (icon) icon.innerText = '⏸';
+                    } else {
+                        gAudio.pause();
+                        vinyl.style.animationPlayState = 'paused';
+                        const icon = element.querySelector('.play-icon');
+                        if (icon) icon.innerText = '▶';
+                    }
+                }
+                return; // Do not reset the whole list UI
+            }
+
+            // If a new song was clicked
+            currentPlayingSrc = src;
+            gAudio.src = src;
+            document.getElementById('playerTitle').innerText = title;
+            
+            if (clickedPlayBtn) {
+                gAudio.play();
+                vinyl.style.animationPlayState = 'running';
+            } else {
+                gAudio.pause();
+                vinyl.style.animationPlayState = 'paused';
+            }
+
+            // Reset list
+            document.querySelectorAll('.track-list-new li').forEach(item => {
+                item.classList.remove('active-track');
+                const colNum = item.querySelector('.col-num');
+                if (colNum) {
+                    const firstChild = colNum.firstElementChild;
+                    if (firstChild && firstChild.classList.contains('play-icon')) {
+                        const num = item.getAttribute('data-num') || '*';
+                        firstChild.outerHTML = `<span class="track-num">${num}</span>`;
+                    }
+                }
+            });
+
+            // Set current
+            element.classList.add('active-track');
+            const colNum = element.querySelector('.col-num');
+            if (colNum) {
+                colNum.innerHTML = clickedPlayBtn ? `<span class="play-icon">⏸</span>` : `<span class="play-icon">▶</span>`;
+            }
+        }
+    </script>
+</body>
+
+</html>

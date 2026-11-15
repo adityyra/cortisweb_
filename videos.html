@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video – Cortis Official</title>
+    <script>
+        if (window.location.protocol.startsWith('http')) {
+            window.location.replace('videos.php' + window.location.search);
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Outfit:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .video-main-layout {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 1000px;
+            /* Diperkecil sedikit agar 2 video tidak terlalu melebar */
+            margin: 0 auto;
+        }
+
+        .video-main-layout .main-video {
+            grid-column: 1 / -1;
+            width: 100%;
+            position: relative;
+        }
+
+        .video-card {
+            width: 100%;
+            position: relative;
+        }
+
+        .video-card iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            display: block;
+            border-radius: 8px;
+            border: none;
+        }
+
+        .video-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            font-family: 'Outfit', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .video-info .title {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .video-main-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="logo-container">
+                <a href="index.html" class="profile-logo" style="text-decoration: none;">
+                    <img src="images/CORTISLOGO.png" alt="Cortis Logo">
+                </a>
+                <a href="index.html" class="logo-brand">CORTIS</a>
+            </div>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html">HOME</a>
+                <a href="about.html">ABOUT</a>
+                <div class="dropdown">
+                    <a href="music.html">MUSIC</a>
+                    <div class="dropdown-content">
+                        <a href="videos.html" class="active">VIDEOS</a>
+                    </div>
+                </div>
+                <a href="jadwal_konser.html">TOUR</a>
+                <a href="galeri.html">GALLERY</a>
+                <a href="notice.html">NOTICE</a>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </header>
+
+        <!-- SIDE INDICATOR -->
+        <div class="side-indicator">
+            <div class="side-number">04</div>
+            <div class="side-line"></div>
+            <div class="side-text">VIDEO</div>
+        </div>
+
+        <!-- PAGE TITLE HERO -->
+        <div class="page-title-hero" style="display: flex; justify-content: center; width: 100%;">
+            <h1 style="text-align: center;">VIDEO</h1>
+        </div>
+
+        <!-- VIDEO SECTION -->
+        <section class="gallery-section" id="video-section">
+            <div class="video-main-layout" id="videoGrid1">
+                <!-- Large Video -->
+                <div class="video-card main-video">
+                    <iframe id="mainVideoPlayer" src="https://www.youtube.com/embed/nCElUD0jvgo"
+                        title="CORTIS Official MV"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+
+                <!-- 3 Smaller Videos -->
+                <div class="video-card" onclick="playInMain('nCElUD0jvgo')"
+                    style="cursor: pointer; transition: transform 0.2s;"
+                    onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; aspect-ratio: 16/9; z-index: 10;">
+                    </div>
+                    <iframe src="https://www.youtube.com/embed/nCElUD0jvgo" title="CORTIS 'ACAI' Official MV"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen style="pointer-events: none;"></iframe>
+                    <div class="video-info">
+                        <span class="title">ME+YOU</span>
+                        <span>2025-10-10</span>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="playInMain('kRpaqR5sbf0')"
+                    style="cursor: pointer; transition: transform 0.2s;"
+                    onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; aspect-ratio: 16/9; z-index: 10;">
+                    </div>
+                    <iframe src="https://www.youtube.com/embed/kRpaqR5sbf0" title="CORTIS 'SHOOT' Official MV"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen style="pointer-events: none;"></iframe>
+                    <div class="video-info">
+                        <span class="title">SHOOT (Firecracker)</span>
+                        <span>2025-08-12</span>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- Slide 2 (Hidden by default) -->
+            <div class="video-main-layout" id="videoGrid2" style="display: none; min-height: 400px; place-content: center;">
+                <h3 style="grid-column: 1 / -1; text-align: center; color: #888; font-weight: 300; letter-spacing: 4px; padding: 100px 0;">MORE VIDEOS COMING SOON</h3>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <a href="javascript:void(0)" class="page-arrow" onclick="changeVideoPage(-1)">&#10094;</a>
+                <span class="page-numbers"><strong id="currentVideoPageNum">1</strong> / 2</span>
+                <a href="javascript:void(0)" class="page-arrow" onclick="changeVideoPage(1)">&#10095;</a>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-social">
+            <a href="https://www.instagram.com/cortis/" target="_blank"
+                style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; transition: opacity 0.2s;"><img src="images/instagram.png" alt="Instagram"
+                    class="footer-icon" style="filter: none;"> INSTAGRAM</a>
+            <a href="https://www.tiktok.com/@cortis_bighit" target="_blank"
+                style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; transition: opacity 0.2s;"><img src="images/tiktok.png" alt="TikTok"
+                    class="footer-icon" style="filter: none;"> TIKTOK</a>
+            <a href="https://x.com/cortis_bighit" target="_blank"
+                style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; transition: opacity 0.2s;"><img src="images/x.png" alt="X"
+                    class="footer-icon" style="filter: none;" > X</a>
+            <a href="https://youtube.com/@cortis_bighit?si=zvE_dOeq7-w3zoBZ" target="_blank"
+                style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; transition: opacity 0.2s;"
+                onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+                <img src="images/Youtube.png" alt="Youtube" class="footer-icon" style="filter: none;"> YOUTUBE
+            </a>
+        </div>
+            <div class="footer-bottom">
+                &copy; 2024 CORTIS OFFICIAL. PRIVACY | CONTACT
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            document.body.classList.toggle('no-scroll');
+        });
+
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+            });
+        });
+        // Function to change the main video
+        function playInMain(videoId) {
+            // Find the main video player in the currently active slide
+            let mainVideo;
+            if (typeof currentVideoPage !== 'undefined' && currentVideoPage === 2) {
+                mainVideo = document.getElementById('mainVideoPlayer2');
+            } else {
+                mainVideo = document.getElementById('mainVideoPlayer');
+            }
+            
+            // Change the source and append ?autoplay=1 to start playing immediately
+            // Using youtube-nocookie for better embed compatibility
+            mainVideo.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
+            // Smoothly scroll the window up to the main video
+            mainVideo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        let currentVideoPage = 1;
+        const totalVideoPages = 2;
+
+        function changeVideoPage(direction) {
+            let newPage = currentVideoPage + direction;
+            if (newPage < 1) newPage = totalVideoPages;
+            if (newPage > totalVideoPages) newPage = 1;
+
+            // Hide all pages
+            for (let i = 1; i <= totalVideoPages; i++) {
+                document.getElementById('videoGrid' + i).style.display = 'none';
+            }
+
+            // Show target page (use display: grid because of video-main-layout)
+            document.getElementById('videoGrid' + newPage).style.display = 'grid';
+            document.getElementById('currentVideoPageNum').innerText = newPage;
+            currentVideoPage = newPage;
+        }
+    </script>
+</body>
+
+</html>
